@@ -4,6 +4,8 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+import os
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'learn.views.home', name='home'),
@@ -14,5 +16,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    (r'^tinymce/(?P<path>.*)$', 'django.views.static.serve',
+    	{'document_root' : os.path.join(os.path.dirname(__file__), "../tinymce")}),
     (r'', include('django.contrib.flatpages.urls')),
 )
